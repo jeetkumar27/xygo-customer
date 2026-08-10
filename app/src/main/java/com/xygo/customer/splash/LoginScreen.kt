@@ -30,10 +30,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.xygo.customer.R
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavController) {
     var phoneNumber by remember {
         mutableStateOf("")
     }
@@ -108,7 +109,7 @@ fun LoginScreen() {
 
         Button(
             onClick = {
-                // We'll navigate to the OTP screen here later
+                navController.navigate("otp/phoneNumber")
             },
 
             enabled = phoneNumber.length == 10,
