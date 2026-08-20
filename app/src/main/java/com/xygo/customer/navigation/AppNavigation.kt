@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.xygo.customer.home.HomeScreen
+import com.xygo.customer.location.PickupLocationScreen
 import com.xygo.customer.splash.LoginScreen
 
 @Composable
@@ -22,7 +23,11 @@ fun AppNavigation() {
         }
 
         composable("home") {
-            HomeScreen()
+            HomeScreen(navController)
+        }
+
+        composable("pickup") {
+            PickupLocationScreen(navController)
         }
     }
 }

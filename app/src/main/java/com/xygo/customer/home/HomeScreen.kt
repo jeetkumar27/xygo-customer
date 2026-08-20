@@ -1,6 +1,7 @@
 package com.xygo.customer.home
 
 import androidx.compose.foundation.background
+import androidx.navigation.NavController
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
 
     var selectedService by remember {
         mutableStateOf("Goods")
@@ -133,7 +134,10 @@ fun HomeScreen() {
         Spacer(modifier = Modifier.height(8.dp))
 
         LocationBox(
-            text = "Enter pickup location"
+            text = "Enter pickup location",
+            onClick = {
+                navController.navigate("pickup")
+            }
         )
 
         Spacer(modifier = Modifier.height(18.dp))
@@ -148,9 +152,11 @@ fun HomeScreen() {
         Spacer(modifier = Modifier.height(8.dp))
 
         LocationBox(
-            text = "Enter destination"
+            text = "Enter destination",
+            onClick = {
+                // Drop location screen will be added later
+            }
         )
-
         Spacer(modifier = Modifier.height(28.dp))
 
         // Book button
@@ -240,14 +246,15 @@ private fun HomeServiceCard(
 
 @Composable
 private fun LocationBox(
-    text: String
+    text: String,
+    onClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(58.dp)
             .clickable {
-                // Location picker later
+                onClick()
             },
         shape = RoundedCornerShape(14.dp),
         colors = CardDefaults.cardColors(
