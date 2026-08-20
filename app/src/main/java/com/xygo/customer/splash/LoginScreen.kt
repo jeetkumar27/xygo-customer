@@ -1,7 +1,5 @@
 package com.xygo.customer.splash
 
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -28,6 +26,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -35,6 +35,7 @@ import com.xygo.customer.R
 
 @Composable
 fun LoginScreen(navController: NavController) {
+
     var phoneNumber by remember {
         mutableStateOf("")
     }
@@ -70,8 +71,10 @@ fun LoginScreen(navController: NavController) {
 
         OutlinedTextField(
             value = phoneNumber,
-            onValueChange = {
-                val filtered = it.filter { ch -> ch.isDigit() }
+
+            onValueChange = { value ->
+
+                val filtered = value.filter { it.isDigit() }
 
                 if (filtered.length <= 10) {
                     phoneNumber = filtered
@@ -85,6 +88,7 @@ fun LoginScreen(navController: NavController) {
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Phone
             ),
+
             singleLine = true,
 
             modifier = Modifier.fillMaxWidth(),
@@ -109,7 +113,7 @@ fun LoginScreen(navController: NavController) {
 
         Button(
             onClick = {
-                navController.navigate("otp/phoneNumber")
+                navController.navigate("home")
             },
 
             enabled = phoneNumber.length == 10,
@@ -128,12 +132,14 @@ fun LoginScreen(navController: NavController) {
 
             shape = RoundedCornerShape(14.dp)
         ) {
+
             Text(
                 text = "CONTINUE",
                 color = Color.Black,
                 fontWeight = FontWeight.Bold
             )
         }
+
         Spacer(modifier = Modifier.height(30.dp))
 
         Text(
@@ -142,5 +148,4 @@ fun LoginScreen(navController: NavController) {
             fontSize = 13.sp
         )
     }
-
 }
